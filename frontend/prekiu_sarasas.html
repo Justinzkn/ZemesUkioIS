@@ -1,0 +1,78 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <title>Prekių sąrašas</title>
+    <link rel="stylesheet" href="{% static 'css/prekiu_sarasas.css' %}">
+    <script defer src="{% static 'js/prekiu_sarasas.js' %}"></script>
+</head>
+<body>
+<header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+        <a href="/iranga">Įrangos peržiūra</a>
+        <a href="/prekiu_sarasas" class="active">Prekių sąrašas</a>
+        <a href="/uzklausos">Užklausos</a>
+        <a href="/darbo_grafikai">Darbo grafikai</a>
+        <a href="/registracija">Registracija</a>
+        <a href="/prisijungimas">Prisijungimas</a>
+    </nav>
+</header>
+
+<h1>Prekių sąrašas</h1>
+
+    <div class="add-btn-container">
+        <button class="add-btn" onclick="window.location.href='/preke_nauja/'">
+            + Pridėti naują prekę
+        </button>
+    </div>
+
+    <div class="likuciu-zemelapis-btn">
+         <button class="add-btn" onclick="window.location.href='/likuciu-zemelapis/'">
+            Peržiūrėti likučių žemėlapį
+        </button>
+    </div>
+
+
+<!-- Filtrai -->
+<div class="filters">
+    <input id="search-name" type="text" placeholder="Ieškoti pagal pavadinimą…">
+    
+    <select id="filter-category">
+        <option value="">Visos kategorijos</option>
+        <option>Daržovės</option>
+        <option>Technika</option>
+        <option>Įrankiai</option>
+    </select>
+
+    <select id="filter-producer">
+        <option value="">Visi gamintojai</option>
+        <option>Agrofarm</option>
+        <option>John Deere</option>
+        <option>Bosch</option>
+    </select>
+
+    <input id="price-min" type="number" placeholder="Kaina nuo">
+    <input id="price-max" type="number" placeholder="Kaina iki">
+
+    <select id="filter-location">
+        <option value="">Visos lokacijos</option>
+        <option>Sandėlis A</option>
+        <option>Sandėlis B</option>
+        <option>Sandėlis C</option>
+    </select>
+
+    <button onclick="applyFilters()">Filtruoti</button>
+</div>
+
+<!-- Kortelės -->
+<div id="product-grid"></div>
+
+<footer>
+    © 2025 Žemės Ūkio IS
+</footer>
+
+</body>
+</html>

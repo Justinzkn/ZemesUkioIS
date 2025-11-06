@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Užsakymo redagavimas</title>
+  <link rel="stylesheet" href="{% static 'css/redaguoti_uzsakyma.css' %}">
+  <script src="{% static 'js/redaguoti_uzsakyma.js' %}"></script>
+</head>
+<body>
+  <header class="hdr">
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav class="nav">
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h1>Užsakymo redagavimas</h1>
+
+    <form class="edit-form">
+      <div class="row">
+        <label>Užsakymo ID</label>
+        <input type="text" value="001" readonly>
+      </div>
+
+      <div class="row">
+        <label>Klientas</label>
+        <input type="text" placeholder="UAB Ūkis">
+      </div>
+
+      <div class="row">
+        <label>Prekė</label>
+        <input type="text" placeholder="Grūdai">
+      </div>
+
+      <div class="row">
+        <label>Kiekis</label>
+        <input type="number" placeholder="600">
+      </div>
+
+      <div class="row">
+        <label>Pastabos</label>
+        <textarea rows="4" placeholder="Papildoma informacija..."></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="save" onclick="window.location.href='/uzsakymai/'" >Išsaugoti pakeitimus</button>
+        <button type="button" class="back" onclick="window.location.href='/uzsakymai/'" >Grįžti</button>
+      </div>
+    </form> 
+  </main>
+
+  <footer class="ftr">© 2025 Žemės Ūkio IS</footer>
+</body>
+</html>

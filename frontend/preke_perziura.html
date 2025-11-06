@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<title>Prekės peržiūra</title>
+<link rel="stylesheet" href="{% static 'css/preke_perziura.css' %}">
+<script defer src="{% static 'js/preke_perziura.js' %}"></script>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+        <a href="/pagrindinis/">Pagrindinis</a>
+        <a href="/iranga/">Įrangos peržiūra</a>
+        <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+        <a href="/uzklausos/">Užklausos</a>
+        <a href="/grafikai/">Darbo grafikai</a>
+        <a href="/registracija/">Registracija</a>
+        <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+</header>
+
+<h1 class="title">Prekės peržiūra</h1>
+
+
+<div class="container">
+
+    <div class="info-box">
+        <p><strong>Pavadinimas:</strong> Bulvės</p>
+        <p><strong>Kategorija:</strong> Daržovės</p>
+        <p><strong>Kaina:</strong> 2.50€ / kg</p>
+        <p><strong>Lokacija:</strong> Sandėlis A</p>
+        <p><strong>Matavimo vienetas:</strong> kg</p>
+        <p><strong>Gamintojas:</strong> Agrofarm</p>
+        <p><strong>Aprašymas:</strong> Aukštos kokybės bulvės, skirtos maistui bei sėjai.</p>
+    </div>
+
+    <div class="button-row">
+        <button id="archiveBtn" class="archive">Archyvuoti prekę</button>
+        <button id="deleteBtn" class="delete">Pašalinti prekę</button>
+    </div>
+
+    <div class="button-row">
+         <button type="button" class="back" onclick="window.location.href='/prekiu_sarasas/'">Grįžti</button>
+    </div>
+
+</div>
+
+<footer class="footer">
+© 2025 Žemės Ūkio IS
+</footer>
+
+</body>
+</html>

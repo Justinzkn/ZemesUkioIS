@@ -27,6 +27,11 @@ nav a {
   padding: 20px 80px;
 }
 
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .card {
   background: #1A4D42;
   color: white;
