@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Prisijungimas</title>
+  <link rel="stylesheet" href="{% static 'css/prisijungimas.css' %}">
+  <script src="{% static 'js/prisijungimas.js' %}"></script>
+</head>
+<body>
+  <header class="hdr">
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/registracija/">Registracija</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h1>Prisijungimas</h1>
+
+    <form class="login-form">
+      <label>El. paštas *</label>
+      <input type="email" placeholder="example@gmail.com" required>
+
+      <label>Slaptažodis *</label>
+      <input type="password" placeholder="Slaptažodis..." required>
+
+      <div class="actions">
+        <button type="button" class="login" onclick="window.location.href='/pagrindinis/'">Prisijungti</button>
+        <button type="button" class="back" onclick="window.location.href='/pagrindinis/'">Grįžti</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="ftr">© 2025 Žemės Ūkio IS</footer>
+</body>
+</html>

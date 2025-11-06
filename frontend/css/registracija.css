@@ -1,0 +1,46 @@
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f7f7;color:#222}
+.hdr{background:#0C3B2E;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.hdr nav a{color:#fff;text-decoration:none;margin-left:16px;font-weight:700}
+.wrap{max-width:700px;margin:30px auto;padding:0 20px}
+h1{text-align:center;margin-bottom:20px}
+
+.reg-form{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+
+.reg-form label{
+  display:block;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.reg-form input, .reg-form select{
+  width:100%;
+  padding:10px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  margin-top:5px;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.confirm{
+  background:#1A4D42;color:#fff;border:0;padding:10px 16px;border-radius:8px;cursor:pointer
+}
+
+.confirm:hover{background:#1e5c4d}
+
+.cancel{
+  background:#7A0000;color:#fff;border:0;padding:10px 16px;border-radius:8px;cursor:pointer
+}
+
+.cancel:hover{background:#930606}
+

@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<title>Nauja prekė</title>
+<link rel="stylesheet" href="{% static 'css/preke_nauja.css' %}">
+<script defer src="{% static 'js/preke_nauja.js' %}"></script>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+        <a href="/pagrindinis/">Pagrindinis</a>
+        <a href="/iranga/">Įrangos peržiūra</a>
+        <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+        <a href="/uzklausos/">Užklausos</a>
+        <a href="/grafikai/">Darbo grafikai</a>
+        <a href="/registracija/">Registracija</a>
+        <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+</header>
+
+<h1 class="title">Pridėti naują prekę</h1>
+
+<div class="container">
+
+<form id="newProductForm">
+
+<label>Pavadinimas:</label>
+<input type="text" required>
+
+<label>Kategorija:</label>
+<select>
+    <option>Daržovės</option>
+    <option>Technika</option>
+    <option>Įrankiai</option>
+</select>
+
+<label>Kaina (€):</label>
+<input type="number" required>
+
+<label>Lokacija:</label>
+<select>
+    <option>Sandėlis A</option>
+    <option>Sandėlis B</option>
+    <option>Sandėlis C</option>
+</select>
+
+<label>Matavimo vienetas:</label>
+<input type="text" required>
+
+<label>Gamintojas:</label>
+<input type="text" required>
+
+<label>Aprašymas:</label>
+<textarea rows="4"></textarea>
+
+<div class="btn-row">
+<button type="submit" class="save">Išsaugoti</button>
+<button type="button" class="back" onclick="window.location.href='/prekiu_sarasas/'">Atgal</button>
+</div>
+
+</form>
+</div>
+
+<footer class="footer">
+© 2025 Žemės Ūkio IS
+</footer>
+
+</body>
+</html>

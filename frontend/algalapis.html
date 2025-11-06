@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Algalapio generavimas</title>
+  <link rel="stylesheet" href="{% static 'css/algalapis.css' %}">
+  <script src="{% static 'js/algalapis.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/grafikai/">Darbo grafikai</a>
+      <a href="/algalapis/">Algalapis</a>
+    </nav>
+  </header>
+
+  <h1>Algalapio generavimas</h1>
+
+  <div class="form-container">
+    <label>Mėnuo:</label>
+    <select>
+      <option>Sausis</option>
+      <option>Vasaris</option>
+      <option>Kovas</option>
+      <option>Balandis</option>
+      <option>Gegužė</option>
+      <option>Birželis</option>
+      <option>Liepa</option>
+      <option>Rugpjūtis</option>
+      <option>Rugsėjis</option>
+      <option>Spalis</option>
+      <option>Lapkritis</option>
+      <option>Gruodis</option>
+    </select>
+
+    <button class="generate">Sugeneruoti algalapį</button>
+  </div>
+
+  <table class="pay-table">
+    <tr>
+      <th>Diena</th>
+      <th>Dirbtos valandos</th>
+      <th>Tarifas</th>
+      <th>Užmokestis</th>
+    </tr>
+    <tr>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <button class="download">Atsisiųsti</button>
+    <button class="print">Spausdinti</button>
+  </div>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>

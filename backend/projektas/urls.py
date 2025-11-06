@@ -21,4 +21,16 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
+    path('pagrindinis/', TemplateView.as_view(template_name='pagrindinis.html')),
+    path('uzsakymai/', TemplateView.as_view(template_name="uzsakymai.html")),
+    path('naujas_uzsakymas/', TemplateView.as_view(template_name="naujas_uzsakymas.html")),
+    path('algalapis/', TemplateView.as_view(template_name='algalapis.html')),
+    path('redaguoti_uzsakyma/', TemplateView.as_view(template_name='redaguoti_uzsakyma.html')),
+    path('apmoketi_uzsakyma/', TemplateView.as_view(template_name='apmoketi_uzsakyma.html')),
+    path('registracija/', TemplateView.as_view(template_name='registracija.html')),
+    path('prisijungimas/', TemplateView.as_view(template_name='prisijungimas.html')),
+    path('prekiu_sarasas/', TemplateView.as_view(template_name='prekiu_sarasas.html')),
+    path('preke/', TemplateView.as_view(template_name='preke_perziura.html')),
+    path('preke_nauja/', TemplateView.as_view(template_name='preke_nauja.html')),
+    path('likuciu-zemelapis/', TemplateView.as_view(template_name='likuciu_zemelapis.html'), name='likuciu_zemelapis'),
 ]

@@ -1,0 +1,106 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+}
+
+header {
+    background: #0c4636;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    color: white;
+}
+
+nav a {
+    margin-left: 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a.active {
+    text-decoration: underline;
+}
+
+h1 {
+    text-align: center;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px;
+}
+
+#product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card button {
+    background: #0c4636;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.add-btn-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.add-btn {
+    background: #2d6a4f;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background: #1d4f3a;
+}
+.likuciu-zemelapis-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.likuciu-zemelapis-btn .btn {
+    background-color: #0d4b3c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.likuciu-zemelapis-btn .btn:hover {
+    background-color: #126b56;
+}
+
+footer {
+    background: #0c4636;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+}

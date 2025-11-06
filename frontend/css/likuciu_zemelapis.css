@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f7f5;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+header {
+    background-color: #0d4b3c;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 30px;
+    text-align: center;
+}
+
+.controls {
+    margin-bottom: 2rem;
+}
+
+#zemelapis {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #e7f0eb;
+    border: 2px solid #0d4b3c;
+    border-radius: 8px;
+    position: relative;
+}
+
+.sandelis {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+#A {
+    top: 40px;
+    left: 250px;
+    background-color: #2e8b57;
+}
+
+#B {
+    top: 250px;
+    left: 100px;
+    background-color: #daa520;
+}
+
+#C {
+    top: 250px;
+    right: 100px;
+    background-color: #b22222;
+}
+
+footer {
+    background-color: #0d4b3c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
