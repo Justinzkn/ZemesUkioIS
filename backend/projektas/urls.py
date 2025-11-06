@@ -24,4 +24,5 @@ urlpatterns = [
     path('pagrindinis/', TemplateView.as_view(template_name='pagrindinis.html')),
     path('uzsakymai/', TemplateView.as_view(template_name="uzsakymai.html")),
     path('naujas_uzsakymas/', TemplateView.as_view(template_name="naujas_uzsakymas.html")),
+    path('algalapis/', TemplateView.as_view(template_name='algalapis.html')),
 ]
