@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Naujas užsakymas</title>
+  <link rel="stylesheet" href="{% static 'css/naujas_uzsakymas.css' %}">
+  <script src="{% static 'js/naujas_uzsakymas.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+    </nav>
+  </header>
+
+  <h1>Naujas užsakymas</h1>
+
+  <form class="order-form">
+    <label>Klientas:</label>
+    <input type="text" placeholder="Įveskite klientą">
+
+    <label>Prekė:</label>
+    <input type="text" placeholder="Įveskite prekę">
+
+    <label>Kiekis:</label>
+    <input type="number" placeholder="Kg / vnt">
+
+    <label>Būsena:</label>
+    <select>
+      <option>Vykdomas</option>
+      <option>Baigtas</option>
+      <option>Atšauktas</option>
+    </select>
+
+    <div class="buttons">
+      <button type="button" class="save">✅ Išsaugoti užsakymą</button>
+    </div>
+  </form>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>
