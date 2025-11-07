@@ -24,6 +24,20 @@
   <main>
     <h1>Įrangos peržiūra</h1>
 
+   <div class="filter-container">
+      <input type="text" id="filterInput" placeholder="Ieškoti pagal pavadinimą...">
+      
+      <select id="typeFilter">
+        <option value="">Visi tipai</option>
+        <option value="Traktorius">Traktorius</option>
+        <option value="Kombainas">Kombainas</option>
+        <option value="Kultivatorius">Kultivatorius</option>
+        <option value="Plūgas">Plūgas</option>
+      </select>
+      
+      <button class="clear-filter" onclick="isvalytiFiltra()">🔄 Išvalyti filtrą</button>
+    </div>
+
     <div class="actions">
       <button onclick="window.location.href='/iranga_prideti/'">Pridėti įrangą</button>
       <button onclick="window.location.href='/iranga_redaguoti/'">Redaguoti įrangą</button>

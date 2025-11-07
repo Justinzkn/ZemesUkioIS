@@ -2,49 +2,46 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Likučių žemėlapis</title>
-    <link rel="stylesheet" href="{% static 'css/likuciu_zemelapis.css' %}">
+  <meta charset="UTF-8">
+  <title>Likučių žemėlapis</title>
+  <link rel="stylesheet" href="{% static 'css/likuciu_zemelapis.css' %}">
+  <script src="{% static 'js/likuciu_zemelapis.js' %}"></script>
 </head>
 <body>
-
-<header>
+  <header>
     <div class="logo">Žemės Ūkio IS</div>
     <nav>
-        <a href="/pagrindinis/">Pradžia</a>
-        <a href="/iranga/">Įrangos peržiūra</a>
-        <a href="/prekiu_sarasas/">Prekių sąrašas</a>
-        <a href="/uzsakymai/">Užsakymai</a>
-        <a href="/darbo_grafikai/">Darbo grafikai</a>
-        <a href="/registracija/">Registracija</a>
-        <a href="/prisijungimas/">Prisijungimas</a>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/prekes/">Prekės</a>
+      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+      <a href="/grafikai/">Darbo grafikai</a>
     </nav>
-</header>
+  </header>
 
-<main>
-    <h1>Likučių žemėlapio generavimas</h1>
+  <main>
+    <h1>Likučių žemėlapis</h1>
 
-    <div class="controls">
-        <label for="preke">Pasirinkite prekę:</label>
-        <select id="preke">
-            <option value="">-- Pasirinkite --</option>
-            <option value="Bulvės">Bulvės</option>
-            <option value="Grūdai">Grūdai</option>
-            <option value="Trąšos">Trąšos</option>
-        </select>
-        <button id="generuoti">Generuoti žemėlapį</button>
+    <div class="map-placeholder">
+      <p>🗺️ Čia bus pavaizduotas sandėlių žemėlapis</p>
     </div>
 
-    <div id="zemelapis">
-        <p>Čia bus parodytas sandėlių žemėlapis...</p>
+    <div class="legend">
+      <p><strong>Sandėliai:</strong></p>
+      <ul>
+        <li>Sandėlis A – Vilnius</li>
+        <li>Sandėlis B – Klaipėda</li>
+        <li>Sandėlis C – Kaunas</li>
+      </ul>
     </div>
-</main>
 
-<footer>
+    <div class="actions">
+      <button onclick="window.location.href='/prekiu_sarasas/'" class="back-btn">🔙 Grįžti</button>
+    </div>
+  </main>
+
+  <footer>
     © 2025 Žemės Ūkio IS
-</footer>
-
-<script src="{% static 'js/likuciu_zemelapis.js' %}"></script>
+  </footer>
 </body>
 </html>

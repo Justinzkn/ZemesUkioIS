@@ -72,6 +72,38 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
+.filter-container {
+  max-width: 700px;
+  margin: 20px auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#filterInput,
+#typeFilter {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.clear-filter {
+  background: #374151;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clear-filter:hover {
+  background: #4b5563;
+}
+
+
 footer {
   margin-top: 40px;
   background: #0C3B2E;

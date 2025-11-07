@@ -5,6 +5,19 @@ body{margin:0;font-family:Arial;background:#f6f6f6}
 .title{text-align:center;margin-top:20px}
 .container{width:60%;margin:auto;background:white;padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
 .info-box p{font-size:1.1em}
+.map-button {
+  background: #1A4D42;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.map-button:hover {
+  background: #206555;
+}
+
 .button-row{display:flex;justify-content:center;gap:10px;margin-top:20px}
 .archive{background:#1e6091;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer}
 .delete{background:#c0392b;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer}
