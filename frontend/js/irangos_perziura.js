@@ -1,0 +1,1 @@
+console.log('Įrangos peržiūros puslapis įkeltas.');

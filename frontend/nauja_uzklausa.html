@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Nauja užklausa</title>
+  <link rel="stylesheet" href="{% static 'css/nauja_uzklausa.css' %}">
+  <script src="{% static 'js/nauja_uzklausa.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/iranga/">Įranga</a>
+      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+      <a href="/uzklausos/">Užklausos</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+      <a href="/grafikai/">Darbo grafikai</a>
+      <a href="/registracija/">Registracija</a>
+      <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Nauja užklausa</h1>
+
+    <div class="form-container">
+      <label for="tipas">Užklausos tipas *</label>
+      <input type="text" id="tipas" placeholder="Įveskite užklausos tipą">
+
+      <label for="aprasymas">Aprašymas *</label>
+      <textarea id="aprasymas" placeholder="Trumpai aprašykite užklausą..."></textarea>
+
+      <div class="actions">
+        <button class="submit" onclick="pateiktiUzklausa()">Pateikti</button>
+        <button class="back" onclick="window.location.href='/grafikai/'">Grįžti</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>

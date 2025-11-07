@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Įrangos peržiūra</title>
+  <link rel="stylesheet" href="{% static 'css/irangos_perziura.css' %}">
+  <script src="{% static 'js/irangos_perziura.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+      <a href="/uzklausos/">Užklausos</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+      <a href="/grafikai/">Darbo grafikai</a>
+      <a href="/registracija/">Registracija</a>
+      <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Įrangos peržiūra</h1>
+
+    <div class="actions">
+      <button onclick="window.location.href='/iranga_prideti/'">Pridėti įrangą</button>
+      <button onclick="window.location.href='/iranga_redaguoti/'">Redaguoti įrangą</button>
+      <button onclick="window.location.href='/iranga_salinti/'">Šalinti įrangą</button>
+      <button onclick="window.location.href='/iranga_komplektavimas/'">Komplektuoti įrangą</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Pavadinimas</th>
+          <th>Tipas</th>
+          <th>Būsena</th>
+          <th>Vieta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Traktorius</td>
+          <td>Technika</td>
+          <td>Veikianti</td>
+          <td>Sandėlys A</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Kultivatorius</td>
+          <td>Technika</td>
+          <td>Remontuojama</td>
+          <td>Sandėlys B</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Sėjamoji</td>
+          <td>Technika</td>
+          <td>Veikianti</td>
+          <td>Sandėlys A</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>
