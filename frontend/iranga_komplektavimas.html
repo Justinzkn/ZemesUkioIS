@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Įrangos komplektavimas</title>
+  <link rel="stylesheet" href="{% static 'css/iranga_komplektavimas.css' %}">
+  <script src="{% static 'js/iranga_komplektavimas.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/iranga/">Įranga</a>
+      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+      <a href="/uzklausos/">Užklausos</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+      <a href="/grafikai/">Darbo grafikai</a>
+      <a href="/registracija/">Registracija</a>
+      <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Įrangos komplektavimas</h1>
+
+    <div class="form-container">
+      <label for="pagrindine">Pasirinkite pagrindinę įrangą *</label>
+      <select id="pagrindine">
+        <option value="">-- Pasirinkti --</option>
+        <option value="Traktorius">Traktorius</option>
+        <option value="Kombainas">Kombainas</option>
+        <option value="Kultivatorius">Kultivatorius</option>
+      </select>
+
+      <label for="papildoma">Pasirinkite papildomą įrangą *</label>
+      <select id="papildoma" multiple>
+        <option value="Plūgas">Plūgas</option>
+        <option value="Sėjamoji">Sėjamoji</option>
+        <option value="Trąšų barstytuvas">Trąšų barstytuvas</option>
+        <option value="Priekaba">Priekaba</option>
+      </select>
+
+      <div class="actions">
+        <button class="combine" onclick="sukomplektuoti()">Sukomplektuoti įrangą</button>
+        <button class="back" onclick="window.location.href='/iranga/'">Grįžti</button>
+      </div>
+    </div>
+
+    <div id="rezultatas" class="result-box" style="display:none;"></div>
+  </main>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>

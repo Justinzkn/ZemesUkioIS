@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Įrangos redagavimas</title>
+  <link rel="stylesheet" href="{% static 'css/iranga_redaguoti.css' %}">
+  <script src="{% static 'js/iranga_redaguoti.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+      <a href="/uzklausos/">Užklausos</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+      <a href="/grafikai/">Darbo grafikai</a>
+      <a href="/registracija/">Registracija</a>
+      <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Įrangos redagavimas</h1>
+
+    <div class="form-container">
+      <label for="id">Įrangos ID</label>
+      <input type="text" id="id" value="1" readonly>
+
+      <label for="pavadinimas">Įrangos pavadinimas *</label>
+      <input type="text" id="pavadinimas" value="Traktorius">
+
+      <label for="tipas">Tipas *</label>
+      <input type="text" id="tipas" value="Technika">
+
+      <label for="busena">Būsena *</label>
+      <select id="busena">
+        <option>Veikianti</option>
+        <option>Remontuojama</option>
+        <option>Neveikianti</option>
+      </select>
+
+      <label for="vieta">Vieta (sandėlys) *</label>
+      <input type="text" id="vieta" value="Sandėlys A">
+
+      <div class="actions">
+        <button class="save" onclick="issaugoti()">Išsaugoti pakeitimus</button>
+        <button class="back" onclick="window.location.href='/iranga/'">Grįžti</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>

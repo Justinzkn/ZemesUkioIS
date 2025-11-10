@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Grafikų generavimas</title>
+  <link rel="stylesheet" href="{% static 'css/grafiku_generavimas.css' %}">
+  <script src="{% static 'js/grafiku_generavimas.js' %}"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/iranga/">Įranga</a>
+      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+      <a href="/uzklausos/">Užklausos</a>
+      <a href="/uzsakymai/">Užsakymai</a>
+      <a href="/grafikai/">Darbo grafikai</a>
+      <a href="/registracija/">Registracija</a>
+      <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Grafikų generavimas</h1>
+    <form id="grafikoForma" class="grafiko-forma">
+      <label for="darbuotojas">Pasirinkite darbuotoją:</label>
+      <select id="darbuotojas" required>
+        <option value="">-- Pasirinkti --</option>
+        <option>Jonas Petrauskas</option>
+        <option>Ona Vainaitė</option>
+        <option>Karolis Stanevičius</option>
+      </select>
+
+      <label for="nuo">Laikotarpis nuo:</label>
+      <input type="date" id="nuo" required>
+
+      <label for="iki">Laikotarpis iki:</label>
+      <input type="date" id="iki" required>
+
+      <button type="submit" class="generate">Generuoti grafiką</button>
+    </form>
+
+    <div id="rezultatas" class="rezultatas"></div>
+
+    <div class="atsisiuntimas">
+      <button id="atsisiusti" class="download" disabled>Atsisiųsti PDF</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Žemės Ūkio IS
+  </footer>
+</body>
+</html>
