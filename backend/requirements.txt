@@ -1,0 +1,5 @@
+Django>=5.2.8
+PyMySQL>=1.0.3
+
+# Optional (production):
+# mysqlclient>=2.1.1
