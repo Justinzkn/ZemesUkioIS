@@ -75,10 +75,32 @@ WSGI_APPLICATION = 'projektas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Database
+# By default this project will attempt to connect to a MySQL/MariaDB server.
+# Connection values are read from environment variables with sensible fallbacks
+# (for security you should set these in your environment instead of committing
+# secrets to source control).
+#
+# Provided DB credentials (used as defaults here):
+#   host: stud.if.ktu.lt (port 20001)  OR  10.2.3.22 (internal)
+#   name: juskon2
+#   user: juskon2
+#   password: ooc0VohY4da5uquo
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.mysql'),
+        'NAME': os.environ.get('DB_NAME', 'juskon2'),
+        'USER': os.environ.get('DB_USER', 'juskon2'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'ooc0VohY4da5uquo'),
+        'HOST': os.environ.get('DB_HOST', 'stud.if.ktu.lt'),
+        'PORT': os.environ.get('DB_PORT', '20001'),
+        'OPTIONS': {
+            # use utf8mb4 for full unicode support
+            'charset': 'utf8mb4',
+            # recommended strict mode
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
