@@ -57,7 +57,8 @@ input, select {
   margin-top: 20px;
 }
 
-button {
+.add {
+  background: #1A4D42;
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
@@ -66,16 +67,17 @@ button {
   font-weight: 600;
 }
 
-.add {
-  background: #1A4D42;
-}
-
 .add:hover {
   background: #236857;
 }
 
 .back {
   background: #374151;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .back:hover {
@@ -89,3 +91,4 @@ footer {
   text-align: center;
   padding: 12px;
 }
+

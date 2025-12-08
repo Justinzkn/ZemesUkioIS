@@ -7,103 +7,191 @@
   <link rel="stylesheet" href="{% static 'css/pagrindinis.css' %}">
   <script src="{% static 'js/pagrindinis.js' %}"></script>
 </head>
+
 <body>
-  <header>
-    <div class="logo">Žemės Ūkio IS</div>
-    <nav>
-      <a href="/paskyros/">Paskyros</a>
-      <a href="/iranga/">Įrangos peržiūra</a>
-      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
-      <a href="/uzklausos/">Užklausos</a>
-      <a href="/grafikai/">Darbo grafikai</a>
-      <a href="/algalapis/">Algalapis</a>
-      <a href="/uzsakymai/">Užsakymai</a>
-      <a href="/registracija/">Registracija</a>
-      <a href="/prisijungimas/">Prisijungimas</a>
-    </nav>
-  </header>
 
-  <h1>Pagrindinis langas</h1>
-  <p>Sveiki atvykę į Žemės ūkio informacinę sistemą!</p>
+<header>
+  <div class="logo">Žemės Ūkio IS</div>
 
-  <div class="cards-container">
-    <a href="/iranga/" class="card-link">
-        <div class="card">
-            <h3>Įrangos peržiūra</h3>
-            <p>Peržiūrėkite visą ūkio įrangą.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/prekiu_sarasas/" class="card-link">
-        <div class="card">
-            <h3>Prekių sąrašas</h3>
-            <p>Valdykite ūkio prekes.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/uzklausos/" class="card-link">
-        <div class="card">
-            <h3>Užklausos</h3>
-            <p>Kurti ir peržiūrėti užklausas.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/grafikai/" class="card-link">
-        <div class="card">
-            <h3>Darbo grafikai</h3>
-            <p>Peržiūrėti darbuotojų grafikus.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/registracija/" class="card-link">
-        <div class="card">
-            <h3>Registracija</h3>
-            <p>Sukurkite naują paskyrą.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/prisijungimas/" class="card-link">
-        <div class="card">
-            <h3>Prisijungimas</h3>
-            <p>Prisijunkite prie sistemos.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/uzsakymai/" class="card-link">
-        <div class="card">
-            <h3>Užsakymai</h3>
-            <p>Peržiūrėkite ir valdykite užsakymus.</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/algalapis/" class="card-link">
-        <div class="card">
-            <h3>Algalapio sugeneravimas</h3>
-            <p>Susigeneruok savo algalapį</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/paskyros/" class="card-link">
-        <div class="card">
-            <h2>Paskyros</h2>
-            <p>Peržiūrėkite ir valdykite sistemos paskyras</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-    <a href="/grafiku_generavimas/" class="card-link">
-        <div class="card">
-            <h2>Grafikų generavimas</h2>
-            <p>Generuokite darbo grafikus</p>
-            <span class="arrow">→</span>
-        </div>
-    </a>
-  </div>
+  <nav>
+
+    {% if request.session.user_id %}
+        
+        {% if request.session.pareigos == 1 %}
+            <!--  KLIENTAS -->
+            <a href="/pagrindinis/">Pagrindinis</a>
+            <a href="/uzsakymai/">Užsakymai</a>
+            <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+            <a href="/atsijungti/" style="color:red;">Atsijungti</a>
+
+        {% elif request.session.pareigos == 2 %}
+            <!--  DARBUOTOJAS -->
+            <a href="/pagrindinis/">Pagrindinis</a>
+            <a href="/iranga/">Įrangos peržiūra</a>
+            <a href="/uzklausos/">Užklausos</a>
+            <a href="/grafikai/">Darbo grafikai</a>
+            <a href="/algalapis/">Algalapis</a>
+            <a href="/atsijungti/" style="color:red;">Atsijungti</a>
+
+        {% elif request.session.pareigos == 3 %}
+            <!--  Administratorius -->
+            <a href="/pagrindinis/">Pagrindinis</a>
+            <a href="/iranga/">Įrangos peržiūra</a>
+            <a href="/prekiu_sarasas/">Prekių sąrašas</a>
+            <a href="/uzklausos/">Užklausos</a>
+            <a href="/grafikai/">Darbo grafikai</a>
+            <a href="/uzsakymai/">Užsakymai</a>
+            <a href="/paskyros/">Paskyros</a>
+            <a href="/grafiku_generavimas/">Grafikų generavimas</a>
+            <a href="/atsijungti/" style="color:red;">Atsijungti</a>
+
+        {% endif %}
+
+    {% else %}
+        <!-- ⚪ Neprisijungęs -->
+        <a href="/pagrindinis/">Pagrindinis</a>
+        <a href="/registracija/">Registracija</a>
+        <a href="/prisijungimas/">Prisijungimas</a>
+    {% endif %}
+
+  </nav>
+</header>
 
 
+<h1>Pagrindinis langas</h1>
+<p>Sveiki atvykę į Žemės ūkio informacinę sistemą!</p>
 
 
-  <footer>
-    © 2025 Žemės Ūkio IS
-  </footer>
+<div class="cards-container">
+
+    {% if request.session.user_id %}
+        
+        {% if request.session.pareigos == 1 %}
+            <!-- Kortelės klientui -->
+            <a href="/uzsakymai/" class="card-link">
+                <div class="card">
+                    <h3>Užsakymai</h3>
+                    <p>Peržiūrėkite ir valdykite užsakymus.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/prekiu_sarasas/" class="card-link">
+                <div class="card">
+                    <h3>Prekių sąrašas</h3>
+                    <p>Sandėlio prekės ir likučiai.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+
+        {% elif request.session.pareigos == 2 %}
+            <!--  Kortelės darbuotojui -->
+            <a href="/iranga/" class="card-link">
+                <div class="card">
+                    <h3>Įrangos peržiūra</h3>
+                    <p>Peržiūrėkite visą ūkio įrangą.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/grafikai/" class="card-link">
+                <div class="card">
+                    <h3>Darbo grafikai</h3>
+                    <p>Darbuotojų grafikai ir keitimai.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/algalapis/" class="card-link">
+                <div class="card">
+                    <h3>Algalapio generavimas</h3>
+                    <p>Peržiūrėkite algalapių informaciją.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/uzklausos/" class="card-link">
+                <div class="card">
+                    <h3>Užklausos</h3>
+                    <p>Peržiūrėkite užklausų informaciją.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+        {% elif request.session.pareigos == 3 %}
+            <!--  Kortelės administratoriui -->
+            <a href="/iranga/" class="card-link">
+                <div class="card">
+                    <h3>Įrangos peržiūra</h3>
+                    <p>Peržiūrėkite visą ūkio įrangą.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/prekiu_sarasas/" class="card-link">
+                <div class="card">
+                    <h3>Prekių sąrašas</h3>
+                    <p>Sandėlio prekės ir likučiai.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/uzklausos/" class="card-link">
+                <div class="card">
+                    <h3>Užklausos</h3>
+                    <p>Peržiūrėkite užklausų informaciją.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/grafikai/" class="card-link">
+                <div class="card">
+                    <h3>Darbo grafikai</h3>
+                    <p>Darbuotojų grafikai ir keitimai.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+            <a href="/grafiku_generavimas/" class="card-link">
+                <div class="card">
+                    <h3>Darbo grafiku generavimas</h3>
+                    <p>Darbuotojų grafikai ir keitimai.</p>
+                    <span class="arrow">→</span>
+                </div>
+            </a>
+
+
+
+
+        {% endif %}
+
+    {% else %}
+
+        <!--  Kortelės neprisijungus -->
+        <a href="/registracija/" class="card-link">
+            <div class="card">
+                <h3>Registracija</h3>
+                <p>Sukurkite naują paskyrą.</p>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+
+        <a href="/prisijungimas/" class="card-link">
+            <div class="card">
+                <h3>Prisijungimas</h3>
+                <p>Prisijunkite prie sistemos.</p>
+                <span class="arrow">→</span>
+            </div>
+        </a>
+
+
+    {% endif %}
+</div>
+
+
+<footer>
+  © 2025 Žemės Ūkio IS
+</footer>
+
 </body>
 </html>

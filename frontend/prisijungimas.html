@@ -19,17 +19,24 @@
   <main class="wrap">
     <h1>Prisijungimas</h1>
 
-    <form class="login-form">
+    <!-- FORM REALIAI SIUNČIA Į DJANGO -->
+    <form class="login-form" method="POST" action="/prisijungimas/">
+      {% csrf_token %}
+
       <label>El. paštas *</label>
-      <input type="email" placeholder="example@gmail.com" required>
+      <input type="email" name="El_pastas" placeholder="example@gmail.com" required>
 
       <label>Slaptažodis *</label>
-      <input type="password" placeholder="Slaptažodis..." required>
+      <input type="password" name="Slaptazodis" placeholder="Slaptažodis..." required>
 
       <div class="actions">
-        <button type="button" class="login" onclick="window.location.href='/pagrindinis/'">Prisijungti</button>
+        <button type="submit" class="login">Prisijungti</button>
         <button type="button" class="back" onclick="window.location.href='/pagrindinis/'">Grįžti</button>
       </div>
+
+      {% if error %}
+        <p style="color:red; margin-top:10px;">{{ error }}</p>
+      {% endif %}
     </form>
   </main>
 

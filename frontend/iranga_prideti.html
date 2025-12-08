@@ -3,54 +3,71 @@
 <html lang="lt">
 <head>
   <meta charset="UTF-8">
-  <title>Įrangos pridėjimas</title>
+  <title>Pridėti įrangą</title>
   <link rel="stylesheet" href="{% static 'css/iranga_prideti.css' %}">
-  <script src="{% static 'js/iranga_prideti.js' %}"></script>
 </head>
+
 <body>
-  <header>
-    <div class="logo">Žemės Ūkio IS</div>
-    <nav>
+
+<header>
+  <div class="logo">Žemės Ūkio IS</div>
+  <nav>
       <a href="/pagrindinis/">Pagrindinis</a>
-      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
-      <a href="/uzklausos/">Užklausos</a>
-      <a href="/uzsakymai/">Užsakymai</a>
-      <a href="/grafikai/">Darbo grafikai</a>
-      <a href="/registracija/">Registracija</a>
-      <a href="/prisijungimas/">Prisijungimas</a>
-    </nav>
-  </header>
+      <a href="/iranga/">Įrangos peržiūra</a>
+      <a href="/atsijungti/" style="color:red;">Atsijungti</a>
+  </nav>
+</header>
 
-  <main>
-    <h1>Įrangos pridėjimas</h1>
+<h1>Pridėti naują įrangą</h1>
 
-    <div class="form-container">
-      <label for="pavadinimas">Įrangos pavadinimas *</label>
-      <input type="text" id="pavadinimas" placeholder="Įveskite pavadinimą">
+<div class="form-container">
 
-      <label for="tipas">Tipas *</label>
-      <input type="text" id="tipas" placeholder="Pvz. Traktorius, Kultivatorius...">
+  <form method="POST" action="/iranga/prideti/">
+      {% csrf_token %}
 
-      <label for="busena">Būsena *</label>
-      <select id="busena">
-        <option value="">-- Pasirinkti būseną --</option>
-        <option>Veikianti</option>
-        <option>Remontuojama</option>
-        <option>Neveikianti</option>
+      <label>Pavadinimas *</label>
+      <input type="text" name="Pavadinimas" required>
+
+      <label>Tipas *</label>
+      <select name="Tipas" required>
+          <option value="">-- Pasirinkite tipą --</option>
+          <option value="1">Traktorius</option>
+          <option value="2">Priekaba</option>
+          <option value="3">Sėjamoji</option>
+          <option value="4">Kultivatorius</option>
+          <option value="5">Purškimo įranga</option>
       </select>
 
-      <label for="vieta">Vieta (sandėlys) *</label>
-      <input type="text" id="vieta" placeholder="Pvz. Sandėlys A">
+      <label>Būklė *</label>
+      <input type="text" name="Bukle" required>
+
+      <label>Vieta *</label>
+      <input type="text" name="Vieta" required>
+
+      <label>Vertė (€) *</label>
+      <input type="number" step="0.01" name="Verte" required>
+
+      <label>Gamintojas *</label>
+      <input type="text" name="Gamintojas" required>
+
+      <label>Pagaminimo data *</label>
+      <input type="date" name="Pagaminimo_data" required>
+
+      <label>Techninė apžiūra *</label>
+      <input type="date" name="Technine_apziura" required>
 
       <div class="actions">
-        <button class="add" onclick="pridetiIranga()">Pridėti įrangą</button>
-        <button class="back" onclick="window.location.href='/iranga/'">Grįžti</button>
+        <button class="add" type="submit">Pridėti</button>
+        <button type="button" class="back" onclick="window.location.href='/iranga/'">Atšaukti</button>
       </div>
-    </div>
-  </main>
 
-  <footer>
-    © 2025 Žemės Ūkio IS
-  </footer>
+  </form>
+
+</div>
+
+<footer>
+  © 2025 Žemės Ūkio IS
+</footer>
+
 </body>
 </html>

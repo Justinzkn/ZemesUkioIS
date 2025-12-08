@@ -15,10 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , include
 from django.views.generic import TemplateView
 
+
 urlpatterns = [
+    path('', include('accounts.urls')),
+    path("iranga/", include("iranga.urls")),
+
+
+
+
+
+
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     path('paskyros/', TemplateView.as_view(template_name='paskyros.html')),
@@ -30,8 +39,8 @@ urlpatterns = [
     path('algalapis/', TemplateView.as_view(template_name='algalapis.html')),
     path('redaguoti_uzsakyma/', TemplateView.as_view(template_name='redaguoti_uzsakyma.html')),
     path('apmoketi_uzsakyma/', TemplateView.as_view(template_name='apmoketi_uzsakyma.html')),
-    path('registracija/', TemplateView.as_view(template_name='registracija.html')),
-    path('prisijungimas/', TemplateView.as_view(template_name='prisijungimas.html')),
+
+   
     path('prekiu_sarasas/', TemplateView.as_view(template_name='prekiu_sarasas.html')),
     path('preke/', TemplateView.as_view(template_name='preke_perziura.html')),
     path('preke_nauja/', TemplateView.as_view(template_name='preke_nauja.html')),
@@ -40,10 +49,9 @@ urlpatterns = [
     path('uzklausa_perziura/', TemplateView.as_view(template_name='uzklausa_perziura.html')),
     path('nauja_uzklausa/', TemplateView.as_view(template_name='nauja_uzklausa.html')),
     path('grafiko_keitimo_uzklausa/', TemplateView.as_view(template_name='grafiko_keitimo_uzklausa.html')),
-    path('iranga/', TemplateView.as_view(template_name='irangos_perziura.html')),
-    path('iranga_prideti/', TemplateView.as_view(template_name='iranga_prideti.html')),
-    path('iranga_redaguoti/', TemplateView.as_view(template_name='iranga_redaguoti.html')),
-    path('iranga_salinti/', TemplateView.as_view(template_name='iranga_salinti.html')),
-    path('iranga_komplektavimas/', TemplateView.as_view(template_name='iranga_komplektavimas.html')),
-
+   # path('iranga/', TemplateView.as_view(template_name='irangos_perziura.html')),
+   # path('iranga_prideti/', TemplateView.as_view(template_name='iranga_prideti.html')),
+   # path('iranga_redaguoti/', TemplateView.as_view(template_name='iranga_redaguoti.html')),
+   # path('iranga_salinti/', TemplateView.as_view(template_name='iranga_salinti.html')),
+   # path('iranga_komplektavimas/', TemplateView.as_view(template_name='iranga_komplektavimas.html')),
 ]

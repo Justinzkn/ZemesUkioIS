@@ -19,32 +19,39 @@
   <main class="wrap">
     <h1>Registracija</h1>
 
-    <form class="reg-form">
+    <!-- FORM REALIAI SIUNČIA Į DJANGO -->
+    <form class="reg-form" method="POST" action="/registracija/">
+      {% csrf_token %}
+
       <label>Vardas *</label>
-      <input type="text" placeholder="Įveskite vardą" required>
+      <input type="text" name="Vardas" placeholder="Įveskite vardą" required>
 
       <label>Pavardė *</label>
-      <input type="text" placeholder="Įveskite pavardę" required>
+      <input type="text" name="Pavarde" placeholder="Įveskite pavardę" required>
 
       <label>El. paštas *</label>
-      <input type="email" placeholder="example@gmail.com" required>
+      <input type="email" name="El_pastas" placeholder="example@gmail.com" required>
 
       <label>Slaptažodis *</label>
-      <input type="password" placeholder="Slaptažodis..." required>
+      <input type="password" name="Slaptazodis" placeholder="Slaptažodis..." required>
 
       <label>Paskyros tipas *</label>
-      <select required>
-        <option>Klientas</option>
-        <option>Darbuotojas</option>
+      <select name="Pareigos" required>
+        <option value="1">Klientas</option>
+        <option value="2">Darbuotojas</option>
       </select>
 
       <label>Sąskaitos numeris (IBAN) *</label>
-      <input type="text" placeholder="LT00 0000 0000 0000 0000" required>
+      <input type="text" name="Saskaitos_numeris" placeholder="LT00 0000 0000 0000 0000" required>
 
       <div class="actions">
-        <button type="button" class="confirm" onclick="window.location.href='/prisijungimas/'">Registruotis</button>
+        <button type="submit" class="confirm">Registruotis</button>
         <button type="button" class="cancel" onclick="window.location.href='/pagrindinis/'">Atšaukti</button>
       </div>
+
+      {% if error %}
+        <p style="color:red; margin-top:10px;">{{ error }}</p>
+      {% endif %}
     </form>
   </main>
 
