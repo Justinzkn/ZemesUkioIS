@@ -1,0 +1,31 @@
+
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f7f7;color:#222}
+.hdr{background:#0C3B2E;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.hdr nav a{color:#fff;text-decoration:none;margin-left:16px;font-weight:700}
+.wrap{max-width:800px;margin:30px auto;padding:0 20px}
+h1{text-align:center;margin-bottom:20px}
+.summary{background:#fff;padding:15px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:20px}
+.payment-box{background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+label{font-weight:700}
+select{width:100%;padding:10px;border-radius:8px;margin-top:8px;border:1px solid #cbd5e1}
+.actions{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+
+.confirm{background:#1A4D42;color:#fff;border:0;padding:10px 16px;border-radius:8px;cursor:pointer}
+.confirm:hover{background:#1e5c4d}  
+
+.back{background:#374151;color:#fff;border:0;padding:10px 16px;border-radius:8px;cursor:pointer}
+.back:hover{background:#4b5563}
+payment-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 12px;
+}
+
+.payment-box label {
+  font-weight: 700;
+  display: block;
+  margin-top: 8px;
+}
+.ftr{margin-top:40px;background:#0C3B2E;color:#fff;text-align:center;padding:12px}

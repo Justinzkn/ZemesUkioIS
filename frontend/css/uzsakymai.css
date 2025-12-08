@@ -53,9 +53,64 @@ th {
   color: white;
 }
 
+.edit-order {
+  padding: 6px 14px;
+  background: #874400;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-order:hover {
+  background: #9a5300;
+}
+
+.cancel-order {
+  padding: 6px 14px;
+  background: #7A0000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.cancel-order:hover {
+  background: #930606;
+}
+
+.pay-order {
+  padding: 6px 14px;
+  background: #005C99;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 6px;
+}
+
+.pay-order:hover {
+  background: #0074c7;
+}
+
 footer {
   margin-top: 80px;
   background: #0C3B2E;
   color: white;
   padding: 14px;
+}
+.pay-all {
+  padding: 10px 20px;
+  background: #005C99;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.pay-all:hover {
+  background: #0074c7;
 }

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <title>Registracija</title>
+  <link rel="stylesheet" href="{% static 'css/registracija.css' %}">
+  <script src="{% static 'js/registracija.js' %}"></script>
+</head>
+<body>
+  <header class="hdr">
+    <div class="logo">Žemės Ūkio IS</div>
+    <nav>
+      <a href="/pagrindinis/">Pagrindinis</a>
+      <a href="/prisijungimas/">Prisijungimas</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h1>Registracija</h1>
+
+    <form class="reg-form">
+      <label>Vardas *</label>
+      <input type="text" placeholder="Įveskite vardą" required>
+
+      <label>Pavardė *</label>
+      <input type="text" placeholder="Įveskite pavardę" required>
+
+      <label>El. paštas *</label>
+      <input type="email" placeholder="example@gmail.com" required>
+
+      <label>Slaptažodis *</label>
+      <input type="password" placeholder="Slaptažodis..." required>
+
+      <label>Paskyros tipas *</label>
+      <select required>
+        <option>Klientas</option>
+        <option>Darbuotojas</option>
+      </select>
+
+      <label>Sąskaitos numeris (IBAN) *</label>
+      <input type="text" placeholder="LT00 0000 0000 0000 0000" required>
+
+      <div class="actions">
+        <button type="button" class="confirm" onclick="window.location.href='/prisijungimas/'">Registruotis</button>
+        <button type="button" class="cancel" onclick="window.location.href='/pagrindinis/'">Atšaukti</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="ftr">© 2025 Žemės Ūkio IS</footer>
+</body>
+</html>
