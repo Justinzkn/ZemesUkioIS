@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'projektas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.mysql'),
-        'NAME': os.environ.get('DB_NAME', 'juskon2'),
-        'USER': os.environ.get('DB_USER', 'juskon2'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'ooc0VohY4da5uquo'),
-        'HOST': os.environ.get('DB_HOST', 'stud.if.ktu.lt'),
-        'PORT': os.environ.get('DB_PORT', '20001'),
+        'NAME': os.environ.get('DB_NAME', 'is'),
+        'USER': os.environ.get('DB_USER', 'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
         'OPTIONS': {
             # use utf8mb4 for full unicode support
             'charset': 'utf8mb4',
