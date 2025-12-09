@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
      'iranga',
+     'uzsakymai',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +106,8 @@ DATABASES = {
         },
     }
 }
+
+# Stripe configuration
 
 
 # Password validation

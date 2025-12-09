@@ -1,116 +1,169 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-
-header {
-  background: #0C3B2E;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-}
-
-nav a {
-  color: white;
-  margin: 0 12px;
-  font-weight: bold;
-  text-decoration: none;
+    font-family: Arial, sans-serif;
+    background: #f6f6f6;
+    margin: 0;
 }
 
 h1 {
-  margin-top: 40px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 32px;      /* gali pasikeisti į 36px jei nori dar didesnio */
+    font-weight: bold;
 }
 
-.new-order {
-  padding: 10px 20px;
-  margin-bottom: 20px;
-  background: #1A4D42;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
+/* Header */
+header {
+    background: #0C3B2E;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.new-order:hover {
-  background: #1e5c4d;
+header a {
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+    text-decoration: none;
 }
 
+header a:hover {
+    text-decoration: underline;
+}
+
+/* Table */
 table {
-  margin: 0 auto;
-  border-collapse: collapse;
-  width: 60%;
-}
-
-th, td {
-  border: 1px solid #ccc;
-  padding: 10px;
+    width: 90%;
+    margin: 25px auto;
+    border-collapse: collapse;
 }
 
 th {
-  background: #1A4D42;
-  color: white;
+    background: #0C3B2E;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
 }
 
-.edit-order {
-  padding: 6px 14px;
-  background: #874400;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+td {
+    background: white;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
 }
 
-.edit-order:hover {
-  background: #9a5300;
+/* Status colors */
+.status {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-weight: bold;
 }
 
-.cancel-order {
-  padding: 6px 14px;
-  background: #7A0000;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-left: 6px;
+.status.waiting {
+    background: #ffcc00;
+    color: #5a4200;
 }
 
-.cancel-order:hover {
-  background: #930606;
+.status.done {
+    background: #3fae3f;
+    color: white;
 }
 
-.pay-order {
-  padding: 6px 14px;
-  background: #005C99;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-left: 6px;
+
+.btn-edit,
+.btn-pay,
+.btn-cancel {
+    border: 0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 2px 0;
 }
 
-.pay-order:hover {
-  background: #0074c7;
+/* Žalias – Redaguoti */
+.btn-edit {
+    background: #1A4D42;
+    color: #fff;
 }
 
+.btn-edit:hover {
+    background: #1e5c4d;
+}
+
+/* Tamsiai pilkas – Apmokėti */
+.btn-pay {
+    background: #374151;
+    color: #fff;
+}
+
+.btn-pay:hover {
+    background: #4b5563;
+}
+
+/* Raudonas – Atšaukti */
+.btn-cancel {
+    background: #b91c1c;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background: #dc2626;
+}
+
+
+.alert {
+    max-width: 900px;
+    margin: 10px auto;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #facc15;
+}
+
+.actions-global {
+    max-width: 900px;
+    margin: 0 auto 15px auto;
+    text-align: center;
+}
+
+.alert {
+    max-width: 900px;
+    margin: 10px auto;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #facc15;
+}
+
+.alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #f87171;
+}
+
+.btn-pay-all {
+    background: #1A4D42;
+    color: #fff;
+    border: 0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-pay-all:hover {
+    background: #1e5c4d;
+}
 footer {
-  margin-top: 80px;
-  background: #0C3B2E;
-  color: white;
-  padding: 14px;
-}
-.pay-all {
-  padding: 10px 20px;
-  background: #005C99;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.pay-all:hover {
-  background: #0074c7;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background: #0C3B2E;
+    color: white;
+    font-weight: bold;
 }

@@ -22,6 +22,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('', include('accounts.urls')),
     path("iranga/", include("iranga.urls")),
+    path("uzsakymai/", include("uzsakymai.urls")),
 
 
 
@@ -34,11 +35,11 @@ urlpatterns = [
     path('grafiku_generavimas/', TemplateView.as_view(template_name='grafiku_generavimas.html')),
     path('grafikai/', TemplateView.as_view(template_name='grafikai.html')),
     path('pagrindinis/', TemplateView.as_view(template_name='pagrindinis.html')),
-    path('uzsakymai/', TemplateView.as_view(template_name="uzsakymai.html")),
-    path('naujas_uzsakymas/', TemplateView.as_view(template_name="naujas_uzsakymas.html")),
+    #path('uzsakymai/', TemplateView.as_view(template_name="uzsakymai.html")),
+    #path('naujas_uzsakymas/', TemplateView.as_view(template_name="naujas_uzsakymas.html")),
     path('algalapis/', TemplateView.as_view(template_name='algalapis.html')),
-    path('redaguoti_uzsakyma/', TemplateView.as_view(template_name='redaguoti_uzsakyma.html')),
-    path('apmoketi_uzsakyma/', TemplateView.as_view(template_name='apmoketi_uzsakyma.html')),
+    #path('redaguoti_uzsakyma/', TemplateView.as_view(template_name='redaguoti_uzsakyma.html')),
+    #path('apmoketi_uzsakyma/', TemplateView.as_view(template_name='apmoketi_uzsakyma.html')),
 
    
     path('prekiu_sarasas/', TemplateView.as_view(template_name='prekiu_sarasas.html')),

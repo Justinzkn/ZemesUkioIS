@@ -3,9 +3,8 @@
 <html lang="lt">
 <head>
   <meta charset="UTF-8">
-  <title>Užsakymo apmokėjimas</title>
+  <title>Apmokėjimas</title>
   <link rel="stylesheet" href="{% static 'css/apmoketi_uzsakyma.css' %}">
-  <script src="{% static 'js/apmoketi_uzsakyma.js' %}"></script>
 </head>
 <body>
   <header class="hdr">
@@ -19,48 +18,65 @@
   <main class="wrap">
     <h1>Apmokėjimas</h1>
 
-    <div class="summary">
-      <p><strong>Užsakymo ID:</strong> 001</p>
-      <p><strong>Klientas:</strong> UAB Ūkis</p>
-      <p><strong>Prekė:</strong> Grūdai</p>
-      <p><strong>Kiekis:</strong> 600 kg</p>
-      <p><strong>Suma:</strong> 280 €</p>
-    </div>
+    <form method="POST" class="pay-form">
+      {% csrf_token %}
 
-    <div class="payment-box">
-      <label>Vardas *</label>
-      <input type="text" placeholder="Įveskite vardą" required>
-
-      <label>Pavardė *</label>
-      <input type="text" placeholder="Įveskite pavardę" required>
-
-      <label>Telefonas *</label>
-      <input type="text" placeholder="+370..." required>
-
-      <label>Gyvenvietė *</label>
-      <input type="text" placeholder="Įveskite gyvenvietę" required>
-
-      <label>Adresas *</label>
-      <input type="text" placeholder="Įveskite adresą" required>
-
-      <label>Pašto kodas *</label>
-      <input type="text" placeholder="Pvz. LT-00000" required>
-
-      <label>Mokėjimo būdas:</label>
-      <select>
-        <option>Banko kortelė</option>
-        <option>Bankinis pavedimas</option>
-        <option>PayPal</option>
-        <option>Grynais (vietoje)</option>
-      </select>
-
-      <div class="actions">
-        <button class="confirm">Patvirtinti mokėjimą</button>
-        <button class="back" onclick="window.location.href='/uzsakymai/'">Grįžti</button>
+      <div class="summary">
+        {% if mode == "single" %}
+          <p><strong>Užsakymo ID:</strong> {{ uzsakymas.id_Uzsakymas }}</p>
+          <p><strong>Suma:</strong> {{ suma }} €</p>
+        {% elif mode == "all" %}
+          <p><strong>Užsakymų skaičius:</strong> {{ uzsakymu_kiekis }}</p>
+          <p><strong>Bendra suma:</strong> {{ suma }} €</p>
+        {% endif %}
       </div>
-    </div>
+
+      <div class="form-group">
+        <label for="vardas">Vardas *</label>
+        <input id="vardas" class="field" type="text" name="vardas" placeholder="Įveskite vardą" required>
+      </div>
+
+      <div class="form-group">
+        <label for="pavarde">Pavardė *</label>
+        <input id="pavarde" class="field" type="text" name="pavarde" placeholder="Įveskite pavardę" required>
+      </div>
+
+      <div class="form-group">
+        <label for="telefonas">Telefonas *</label>
+        <input id="telefonas" class="field" type="text" name="telefonas" placeholder="+370..." required>
+      </div>
+
+      <div class="form-group">
+        <label for="gyvenviete">Gyvenvietė *</label>
+        <input id="gyvenviete" class="field" type="text" name="gyvenviete" placeholder="Įveskite gyvenvietę" required>
+      </div>
+
+      <div class="form-group">
+        <label for="adresas">Adresas *</label>
+        <input id="adresas" class="field" type="text" name="adresas" placeholder="Įveskite adresą" required>
+      </div>
+
+      <div class="form-group">
+        <label for="pasto_kodas">Pašto kodas *</label>
+        <input id="pasto_kodas" class="field" type="text" name="pasto_kodas" placeholder="Pvz. LT-00000" required>
+      </div>
+
+      <div class="form-group">
+        <label for="mokejimo_budas">Mokėjimo būdas *</label>
+        <select id="mokejimo_budas" class="field" name="mokejimo_budas" required>
+          <option value="kortele">Banko kortelė</option>
+          <option value="grynais">Grynais (vietoje)</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="confirm" type="submit">Patvirtinti mokėjimą</button>
+      </div>
+    </form>
   </main>
 
   <footer class="ftr">© 2025 Žemės Ūkio IS</footer>
+
+  <script src="{% static 'js/apmoketi_uzsakyma.js' %}"></script>
 </body>
 </html>
