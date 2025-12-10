@@ -91,9 +91,12 @@ def uzsakymai_perziura(request):
 # ----------------------------------------------------------
 def uzsakymas_naujas(request):
 
+    # Visos prekės pasirinkimui formoje
     with connection.cursor() as cursor:
         cursor.execute("SELECT * FROM preke")
         prekes = dictfetchall(cursor)
+
+    msg = None  # klaidos žinutė, jei trūksta likučio
 
     if request.method == "POST":
 
@@ -103,21 +106,80 @@ def uzsakymas_naujas(request):
             return redirect("/prisijungimas/")
 
         prekes_ids = request.POST.getlist("preke")
-        kiekiai = request.POST.getlist("kiekis")
+        kiekiai    = request.POST.getlist("kiekis")
 
-        # ---- Skaičiuojame bendrą sumą ----
-        bendra_suma = 0
+        # 1) Sukaupiam kiekius pagal prekę (jei ta pati prekė pasirinkta keliose eilutėse)
+        prekiu_kiekiai = {}  # {preke_id: bendras_kiekis}
+
+        for pid, kiek in zip(prekes_ids, kiekiai):
+            if not pid or not kiek:
+                continue
+
+            try:
+                kiek_int = int(kiek)
+            except ValueError:
+                continue
+
+            if kiek_int <= 0:
+                continue
+
+            pid_int = int(pid)
+            prekiu_kiekiai[pid_int] = prekiu_kiekiai.get(pid_int, 0) + kiek_int
+
+        # Jei nieko realiai nepasirinkta – grįžtam
+        if not prekiu_kiekiai:
+            msg = "Pasirinkite bent vieną prekę ir kiekį."
+            return render(request, "naujas_uzsakymas.html", {
+                "prekes": prekes,
+                "msg": msg,
+            })
+
+        # 2) Patikrinam, ar užtenka likučio kiekvienai prekei
         with connection.cursor() as cursor:
-            for pid, kiek in zip(prekes_ids, kiekiai):
-                cursor.execute("SELECT Kaina FROM preke WHERE id_Preke = %s", [pid])
-                price = cursor.fetchone()[0]
-                bendra_suma += float(price) * int(kiek)
+            for pid, kiekis in prekiu_kiekiai.items():
+                cursor.execute("""
+                    SELECT COALESCE(SUM(Kiekis), 0) AS Likutis
+                    FROM likutis
+                    WHERE fk_Preke_id_Preke = %s
+                """, [pid])
+                row = cursor.fetchone()
+                turimas = row[0] if row else 0
 
-        # ---- Užsakymo duomenys ----
+                if kiekis > turimas:
+                    # Pasiimam pavadinimą, kad klaidos žinutė būtų aiški
+                    cursor.execute("""
+                        SELECT Pavadinimas
+                        FROM preke
+                        WHERE id_Preke = %s
+                    """, [pid])
+                    p_row = cursor.fetchone()
+                    pav = p_row[0] if p_row else f"ID {pid}"
+
+                    msg = (
+                        f"Prekės „{pav}“ likutis nepakankamas. "
+                        f"Turime {turimas}, bandote užsakyti {kiekis}."
+                    )
+
+                    return render(request, "naujas_uzsakymas.html", {
+                        "prekes": prekes,
+                        "msg": msg,
+                    })
+
+        # 3) Jei čia atėjom – likučio užtenka visoms prekėms, galima skaičiuoti kainą
+        bendra_suma = 0.0
+        with connection.cursor() as cursor:
+            for pid, kiekis in prekiu_kiekiai.items():
+                cursor.execute("SELECT Kaina FROM preke WHERE id_Preke = %s", [pid])
+                price_row = cursor.fetchone()
+                if not price_row:
+                    continue
+                price = float(price_row[0])
+                bendra_suma += price * kiekis
+
         busena = 1  # laukia apmokėjimo
         data = date.today()
 
-        # ---- Įrašome užsakymą ----
+        # 4) Sukuriam užsakymą, įrašom eilučių prekes ir sumažinam likučius
         with connection.cursor() as cursor:
             cursor.execute("""
                 INSERT INTO uzsakymas (Busena, Kaina, Data, fk_Naudotojas_id_Naudotojas)
@@ -126,17 +188,28 @@ def uzsakymas_naujas(request):
 
             uzsakymo_id = cursor.lastrowid
 
-            # ---- Įrašome prekes į uzsakymo_preke ----
-            for pid, kiek in zip(prekes_ids, kiekiai):
+            for pid, kiekis in prekiu_kiekiai.items():
+                # į uzsakymo_preke
                 cursor.execute("""
                     INSERT INTO uzsakymo_preke (Kiekis, fk_Uzsakymas_id_Uzsakymas, fk_Preke_id_Preke)
                     VALUES (%s, %s, %s)
-                """, [kiek, uzsakymo_id, pid])
+                """, [kiekis, uzsakymo_id, pid])
+
+                # sumažinam likutį (paprastai – iš vienos eilutės)
+                cursor.execute("""
+                    UPDATE likutis
+                    SET Kiekis = Kiekis - %s
+                    WHERE fk_Preke_id_Preke = %s
+                    LIMIT 1
+                """, [kiekis, pid])
 
         return redirect("/uzsakymai/")
 
-    return render(request, "naujas_uzsakymas.html", {"prekes": prekes})
-
+    # GET – tiesiog forma
+    return render(request, "naujas_uzsakymas.html", {
+        "prekes": prekes,
+        "msg": msg,
+    })
 
 # ----------------------------------------------------------
 # 3. Redaguoti užsakymą
@@ -555,30 +628,34 @@ def uzsakymas_atsaukti(request, id):
     if request.method == "POST":
 
         with connection.cursor() as cursor:
+
+            # 1. Pasiimam visas prekes iš šio užsakymo
             cursor.execute("""
-                SELECT Busena FROM uzsakymas
-                WHERE id_Uzsakymas = %s
+                SELECT fk_Preke_id_Preke, Kiekis
+                FROM uzsakymo_preke
+                WHERE fk_Uzsakymas_id_Uzsakymas = %s
             """, [id])
-            row = cursor.fetchone()
+            eilutes = dictfetchall(cursor)
 
-        if not row:
-            return redirect("/uzsakymai/")
+            # 2. Grąžinam likučius (paprastai – į vieną likučio eilutę)
+            for row in eilutes:
+                preke_id = row["fk_Preke_id_Preke"]
+                kiekis = row["Kiekis"]
 
-        busena = row[0]
+                cursor.execute("""
+                    UPDATE likutis
+                    SET Kiekis = Kiekis + %s
+                    WHERE fk_Preke_id_Preke = %s
+                    LIMIT 1
+                """, [kiekis, preke_id])
 
-        # Jei nebelaukia apmokėjimo – negalima atšaukti
-        if busena != 1:
-            return redirect("/uzsakymai/?cant_cancel=1")
-
-        with connection.cursor() as cursor:
-
-            # 1. Ištrinti prekes
+            # 3. Ištrinti prekes iš uzsakymo_preke
             cursor.execute("""
                 DELETE FROM uzsakymo_preke
                 WHERE fk_Uzsakymas_id_Uzsakymas = %s
             """, [id])
 
-            # 2. Ištrinti patį užsakymą
+            # 4. Ištrinti patį užsakymą
             cursor.execute("""
                 DELETE FROM uzsakymas
                 WHERE id_Uzsakymas = %s
@@ -586,4 +663,5 @@ def uzsakymas_atsaukti(request, id):
 
         return redirect("/uzsakymai/")
 
+    # GET request → paprastas redirect (apsauga)
     return redirect("/uzsakymai/")

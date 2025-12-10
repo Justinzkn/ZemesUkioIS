@@ -2,72 +2,187 @@
 <!DOCTYPE html>
 <html lang="lt">
 <head>
-<meta charset="UTF-8">
-<title>Nauja prekė</title>
-<link rel="stylesheet" href="{% static 'css/preke_nauja.css' %}">
-<script defer src="{% static 'js/preke_nauja.js' %}"></script>
+  <meta charset="UTF-8">
+  <title>Nauja prekė</title>
+  <link rel="stylesheet" href="{% static 'css/uzsakymai.css' %}">
+  <style>
+    .wrap{
+      max-width:800px;
+      margin:30px auto;
+      padding:0 20px;
+    }
+    .form-box{
+      background:#fff;
+      padding:20px;
+      border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,.05);
+    }
+    .form-box label{
+      display:block;
+      font-weight:700;
+      margin-top:10px;
+    }
+    .form-box input,
+    .form-box textarea,
+    .form-box select{
+      width:100%;
+      padding:8px;
+      margin-top:4px;
+      border-radius:6px;
+      border:1px solid #cbd5e1;
+      box-sizing:border-box;
+    }
+
+    .stock-row{
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+    }
+    .stock-row select{
+      flex: 2;
+    }
+    .stock-row input{
+      flex: 1;
+    }
+
+    .btn-primary{
+      background:#1A4D42;
+      color:#fff;
+      border:0;
+      padding:10px 16px;
+      border-radius:8px;
+      cursor:pointer;
+      margin-top:15px;
+    }
+    .btn-primary:hover{ background:#1e5c4d; }
+
+    .btn-secondary{
+      background:#374151;
+      color:#fff;
+      border:0;
+      padding:10px 16px;
+      border-radius:8px;
+      cursor:pointer;
+      margin-top:15px;
+      margin-left:8px;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .btn-add-row{
+      margin-top:10px;
+      background:#0c3b2e;
+      color:#fff;
+      border:0;
+      padding:6px 12px;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .btn-add-row:hover{ background:#145c46; }
+  </style>
 </head>
 <body>
-
-<header class="navbar">
-    <div class="logo">Žemės Ūkio IS</div>
-    <nav>
-        <a href="/pagrindinis/">Pagrindinis</a>
-        <a href="/iranga/">Įrangos peržiūra</a>
-        <a href="/prekiu_sarasas/">Prekių sąrašas</a>
-        <a href="/uzklausos/">Užklausos</a>
-        <a href="/grafikai/">Darbo grafikai</a>
-        <a href="/registracija/">Registracija</a>
-        <a href="/prisijungimas/">Prisijungimas</a>
-    </nav>
+<header>
+  <div class="logo">Žemės Ūkio IS</div>
+  <nav>
+    <a href="/pagrindinis/">Pagrindinis</a>
+    <a href="/prekiu_sarasas/">Prekės</a>
+  </nav>
 </header>
 
-<h1 class="title">Pridėti naują prekę</h1>
+<div class="wrap">
+  <h1>Pridėti naują prekę</h1>
 
-<div class="container">
+  {% if msg %}
+    <div class="alert {% if msg_type == 'error' %}alert-error{% endif %}">
+      {{ msg }}
+    </div>
+  {% endif %}
 
-<form id="newProductForm">
+  <div class="form-box">
+    <form method="POST">
+      {% csrf_token %}
 
-<label>Pavadinimas:</label>
-<input type="text" required>
+      <label for="pavadinimas">Pavadinimas *</label>
+      <input type="text" id="pavadinimas" name="pavadinimas" required>
 
-<label>Kategorija:</label>
-<select>
-    <option>Daržovės</option>
-    <option>Technika</option>
-    <option>Įrankiai</option>
-</select>
+      <label for="kaina">Kaina (€) *</label>
+      <input type="text" id="kaina" name="kaina" required>
 
-<label>Kaina (€):</label>
-<input type="number" required>
+      <label for="aprasymas">Aprašymas</label>
+      <textarea id="aprasymas" name="aprasymas" rows="4"></textarea>
 
-<label>Lokacija:</label>
-<select>
-    <option>Sandėlis A</option>
-    <option>Sandėlis B</option>
-    <option>Sandėlis C</option>
-</select>
+      <!-- KATEGORIJA -->
+      <label for="kategorija">Kategorija *</label>
+      <select id="kategorija" name="kategorija" required>
+        <option value="">-- Pasirinkite kategoriją --</option>
+        <option value="1">Grūdai</option>
+        <option value="2">Įranga</option>
+        <option value="3">Trašos</option>
+        <option value="4">Daržvės</option>
+        <option value="5">Sodinukai</option>
+      </select>
 
-<label>Matavimo vienetas:</label>
-<input type="text" required>
 
-<label>Gamintojas:</label>
-<input type="text" required>
+        <label for="matavimo_vienetas">Matavimo vienetas *</label>
+        <select id="matavimo_vienetas" name="matavimo_vienetas" required>
+            <option value="">-- Pasirinkite matavimo vienetą --</option>
+            <option value="kg">kg</option>
+            <option value="t">t</option>
+            <option value="l">l</option>
+            <option value="vnt">vnt</option>
+            <option value="m³">m³</option>
+        </select>
 
-<label>Aprašymas:</label>
-<textarea rows="4"></textarea>
+      <!-- SANDELIAI + LIKUČIAI (daug eilučių) -->
+      <label>Pradiniai likučiai sandėliuose</label>
 
-<div class="btn-row">
-<button type="submit" class="save">Išsaugoti</button>
-<button type="button" class="back" onclick="window.location.href='/prekiu_sarasas/'">Atgal</button>
+      <div id="stock-rows">
+        <div class="stock-row">
+          <select name="sandelis_id">
+            <option value="">-- Pasirinkite sandėlį --</option>
+            {% for s in sandeliai %}
+              <option value="{{ s.id_Sandelis }}">{{ s.Pavadinimas }}</option>
+            {% endfor %}
+          </select>
+          <input type="number" name="likutis" min="0" placeholder="Kiekis">
+        </div>
+      </div>
+
+      <button type="button" class="btn-add-row" onclick="addStockRow()">
+        + Pridėti dar sandėlį
+      </button>
+
+      <br>
+
+      <button type="submit" class="btn-primary">Išsaugoti</button>
+      <a href="/prekiu_sarasas/" class="btn-secondary">Grįžti</a>
+    </form>
+  </div>
 </div>
 
-</form>
-</div>
+<footer>© 2025 Žemės Ūkio IS</footer>
 
-<footer class="footer">
-© 2025 Žemės Ūkio IS
-</footer>
+<script>
+function addStockRow() {
+  const container = document.getElementById('stock-rows');
+  const rows = container.getElementsByClassName('stock-row');
+  const lastRow = rows[rows.length - 1];
+  const clone = lastRow.cloneNode(true);
 
+  // išvalom pasirinkimus / įvestis
+  const selects = clone.getElementsByTagName('select');
+  const inputs  = clone.getElementsByTagName('input');
+  if (selects.length > 0) {
+    selects[0].selectedIndex = 0;
+  }
+  if (inputs.length > 0) {
+    inputs[0].value = "";
+  }
+
+  container.appendChild(clone);
+}
+</script>
 </body>
 </html>

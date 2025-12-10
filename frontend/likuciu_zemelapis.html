@@ -3,45 +3,101 @@
 <html lang="lt">
 <head>
   <meta charset="UTF-8">
-  <title>Likučių žemėlapis</title>
+  <title>Likučių žemėlapis – {{ preke.Pavadinimas }}</title>
+
+  <!-- Tavo CSS -->
   <link rel="stylesheet" href="{% static 'css/likuciu_zemelapis.css' %}">
-  <script src="{% static 'js/likuciu_zemelapis.js' %}"></script>
+
+  <!-- Leaflet CSS (žemėlapis) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="">
+  </script>
 </head>
 <body>
-  <header>
+  <header class="hdr">
     <div class="logo">Žemės Ūkio IS</div>
-    <nav>
+    <nav class="nav">
       <a href="/pagrindinis/">Pagrindinis</a>
-      <a href="/prekes/">Prekės</a>
       <a href="/prekiu_sarasas/">Prekių sąrašas</a>
       <a href="/uzsakymai/">Užsakymai</a>
       <a href="/grafikai/">Darbo grafikai</a>
     </nav>
   </header>
 
-  <main>
-    <h1>Likučių žemėlapis</h1>
+  <main class="wrap">
+    <h1>Likučių žemėlapis: {{ preke.Pavadinimas }}</h1>
 
-    <div class="map-placeholder">
-      <p>🗺️ Čia bus pavaizduotas sandėlių žemėlapis</p>
-    </div>
+    <div class="map-card">
+      {% if sandeliai %}
+        <p class="info">
+          Rodomi sandėliai, kuriuose yra šios prekės likutis
+          (matavimo vnt.: <strong>{{ preke.Matavimo_vienetas }}</strong>).
+        </p>
+      {% else %}
+        <p class="info info-empty">
+          Šiuo metu nei viename sandėlyje nėra šios prekės likučio.
+        </p>
+      {% endif %}
 
-    <div class="legend">
-      <p><strong>Sandėliai:</strong></p>
-      <ul>
-        <li>Sandėlis A – Vilnius</li>
-        <li>Sandėlis B – Klaipėda</li>
-        <li>Sandėlis C – Kaunas</li>
-      </ul>
-    </div>
+      <div id="map"></div>
 
-    <div class="actions">
-      <button onclick="window.location.href='/prekiu_sarasas/'" class="back-btn">🔙 Grįžti</button>
+      <section class="legend">
+        <h2>Sandėliai ir likučiai</h2>
+        {% if sandeliai %}
+          <ul>
+            {% for s in sandeliai %}
+              <li>
+                <strong>{{ s.Pavadinimas }}</strong> –
+                {{ s.Adresas }},
+                likutis: {{ s.Kiekis }} {{ preke.Matavimo_vienetas }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>Duomenų nėra.</p>
+        {% endif %}
+      </section>
+
+      <div class="actions">
+        <button onclick="window.location.href='/prekes/{{ preke.id_Preke }}/'" class="btn-back">
+          Grįžti į prekės peržiūrą
+        </button>
+      </div>
     </div>
   </main>
 
-  <footer>
+  <footer class="ftr">
     © 2025 Žemės Ūkio IS
   </footer>
+
+  <!-- Duomenis iš Django perduodam į JS -->
+  <script>
+  window.ZIS_LIKUCIAI = {
+    matavimo_vnt: "{{ preke.Matavimo_vienetas|escapejs }}",
+    sandeliai: [
+      {% for s in sandeliai %}
+      {
+        name: "{{ s.Pavadinimas|escapejs }}",
+        address: "{{ s.Adresas|escapejs }}",
+        qty: {{ s.Kiekis }},
+        lat: {{ s.Platuma|default:"0" }},
+        lng: {{ s.Ilguma|default:"0" }}
+      }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  };
+</script>
+
+  <!-- Tavo JS, kuris nupaišo žemėlapį -->
+  <script src="{% static 'js/likuciu_zemelapis.js' %}"></script>
 </body>
 </html>

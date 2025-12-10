@@ -1,71 +1,133 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="lt">
 <head>
-    <meta charset="UTF-8">
-    <title>Prekių sąrašas</title>
-    <link rel="stylesheet" href="{% static 'css/prekiu_sarasas.css' %}">
-    <script defer src="{% static 'js/prekiu_sarasas.js' %}"></script>
+  <meta charset="UTF-8">
+  <title>Prekių katalogas</title>
+  <link rel="stylesheet" href="{% static 'css/uzsakymai.css' %}">
 </head>
 <body>
 <header>
-    <div class="logo">Žemės Ūkio IS</div>
-    <nav>
-        <a href="/iranga">Įrangos peržiūra</a>
-        <a href="/prekiu_sarasas" class="active">Prekių sąrašas</a>
-        <a href="/uzklausos">Užklausos</a>
-        <a href="/darbo_grafikai">Darbo grafikai</a>
-        <a href="/registracija">Registracija</a>
-        <a href="/prisijungimas">Prisijungimas</a>
-    </nav>
+  <div class="logo">Žemės Ūkio IS</div>
+  <nav>
+    <a href="/pagrindinis/">Pagrindinis</a>
+    <a href="/uzsakymai/">Užsakymai</a>
+     {% if request.session.pareigos == 3 %}
+    <a href="/prekiu_sarasas/nauja/">Nauja prekė</a>
+     {% endif %}    
+  </nav>
 </header>
 
-<h1>Prekių sąrašas</h1>
+<h1>Prekių katalogas</h1>
 
-    <div class="add-btn-container">
-        <button class="add-btn" onclick="window.location.href='/preke_nauja/'">
-            + Pridėti naują prekę
-        </button>
-    </div>
+{% if msg_success %}
+  <div class="alert">{{ msg_success }}</div>
+{% endif %}
 
-<!-- Filtrai -->
-<div class="filters">
-    <input id="search-name" type="text" placeholder="Ieškoti pagal pavadinimą…">
-    
-    <select id="filter-category">
-        <option value="">Visos kategorijos</option>
-        <option>Daržovės</option>
-        <option>Technika</option>
-        <option>Įrankiai</option>
+{% if msg %}
+  <div class="alert alert-error">{{ msg }}</div>
+{% endif %}
+
+<!-- FILTRAI + mygtukas naujai prekei -->
+<form method="get" class="filter-bar">
+  <!-- Filtravimas pagal kategoriją -->
+  <label>
+    Kategorija:
+    <select name="kategorija">
+      <option value="">Visos</option>
+      <option value="1" {% if filter_kat == '1' %}selected{% endif %}>Grūdai</option>
+      <option value="2" {% if filter_kat == '2' %}selected{% endif %}>Įranga</option>
+      <option value="3" {% if filter_kat == '3' %}selected{% endif %}>Trašos</option>
+      <option value="4" {% if filter_kat == '4' %}selected{% endif %}>Daržvės</option>
+      <option value="5" {% if filter_kat == '5' %}selected{% endif %}>Sodinukai</option>
     </select>
+  </label>
 
-    <select id="filter-producer">
-        <option value="">Visi gamintojai</option>
-        <option>Agrofarm</option>
-        <option>John Deere</option>
-        <option>Bosch</option>
-    </select>
+  <!-- Paieška pagal pavadinimą / aprašymą -->
+  <label>
+    Paieška:
+    <input type="text" name="q" value="{{ filter_q }}">
+  </label>
 
-    <input id="price-min" type="number" placeholder="Kaina nuo">
-    <input id="price-max" type="number" placeholder="Kaina iki">
+  <!-- Kainos intervalas -->
+  <label>
+    Kaina nuo:
+    <input type="text" name="kaina_nuo" size="6" value="{{ filter_min }}">
+  </label>
+  <label>
+    iki:
+    <input type="text" name="kaina_iki" size="6" value="{{ filter_max }}">
+  </label>
 
-    <select id="filter-location">
-        <option value="">Visos lokacijos</option>
-        <option>Sandėlis A</option>
-        <option>Sandėlis B</option>
-        <option>Sandėlis C</option>
-    </select>
+  <button type="submit" class="btn-pay">Filtruoti</button>
 
-    <button onclick="applyFilters()">Filtruoti</button>
-</div>
+  <a href="/prekiu_sarasas/"
+     class="btn-cancel"
+     style="text-decoration:none; padding:6px 12px; font-size:14px;">
+    Išvalyti
+  </a>
+</form>
 
-<!-- Kortelės -->
-<div id="product-grid"></div>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Pavadinimas</th>
+      <th>Kaina (€)</th>
+      <th>Kategorija</th>
+      <th>Kiekis</th>
+      <th>Matavimo vienetas</th>
+      <th>Veiksmai</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in prekes %}
+      <tr>
+        <td>{{ p.id_Preke }}</td>
+        <td>{{ p.Pavadinimas }}</td>
+        <td>{{ p.Kaina }}</td>
 
-<footer>
-    © 2025 Žemės Ūkio IS
-</footer>
+        <td>
+          {% if p.Kategorija == 1 %}
+            <span>Grūdai</span>
+          {% elif p.Kategorija == 2 %}
+            <span>Įranga</span>
+          {% elif p.Kategorija == 3 %}
+            <span>Trašos</span>
+          {% elif p.Kategorija == 4 %}
+            <span>Daržvės</span>
+          {% elif p.Kategorija == 5 %}
+            <span>Sodinukai</span>
+          {% else %}
+            <span>-</span>
+          {% endif %}
+        </td>
 
+        <td>{{ p.Bendras_likutis }}</td>
+        <td>{{ p.Matavimo_vienetas }}</td>
+
+        <td>
+          <a href="/prekes/{{ p.id_Preke }}/" class="btn-edit">Peržiūrėti</a>
+           <form action="/prekes/istrinti/{{ p.id_Preke }}/"
+                method="POST"
+                style="display:inline;">
+            {% csrf_token %}
+            <button type="submit"
+                    class="btn-cancel"
+                    onclick="return confirm('Ar tikrai norite panaikinti šią prekę?');">
+                    Naikinti
+            </button>
+  </form>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="7">Šiuo metu sandėlyje nėra nė vienos prekės.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<footer>© 2025 Žemės Ūkio IS</footer>
 </body>
 </html>

@@ -15,7 +15,9 @@
       <a href="/uzsakymai/">Užsakymai</a>
     </nav>
 </header>
-
+    {% if msg %}
+    <div class="alert alert-error">{{ msg }}</div>
+    {% endif %}
 <h1>Naujas užsakymas</h1>
 
 <form method="POST">

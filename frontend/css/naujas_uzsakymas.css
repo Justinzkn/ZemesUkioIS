@@ -64,5 +64,9 @@ footer {
   color: white;
   padding: 14px;
 }
-
+.alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #f87171;
+}
 

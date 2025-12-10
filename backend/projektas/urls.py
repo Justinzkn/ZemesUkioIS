@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.urls import path , include
 from django.views.generic import TemplateView
 
+from prekes.views import likuciu_zemelapis
+
 
 urlpatterns = [
     path('', include('accounts.urls')),
     path("iranga/", include("iranga.urls")),
     path("uzsakymai/", include("uzsakymai.urls")),
+    path('prekes/', include('prekes.urls')),
+    path('prekiu_sarasas/', include('prekes.urls')),
+     path('likuciu_zemelapis/<int:preke_id>/', likuciu_zemelapis, name='likuciu_zemelapis'),
 
 
 
@@ -42,10 +47,10 @@ urlpatterns = [
     #path('apmoketi_uzsakyma/', TemplateView.as_view(template_name='apmoketi_uzsakyma.html')),
 
    
-    path('prekiu_sarasas/', TemplateView.as_view(template_name='prekiu_sarasas.html')),
-    path('preke/', TemplateView.as_view(template_name='preke_perziura.html')),
-    path('preke_nauja/', TemplateView.as_view(template_name='preke_nauja.html')),
-    path('likuciu_zemelapis/', TemplateView.as_view(template_name='likuciu_zemelapis.html'), name='likuciu_zemelapis'),
+    #path('prekiu_sarasas/', TemplateView.as_view(template_name='prekiu_sarasas.html')),
+    #path('preke/', TemplateView.as_view(template_name='preke_perziura.html')),
+    #path('preke_nauja/', TemplateView.as_view(template_name='preke_nauja.html')),
+   # path('likuciu_zemelapis/', TemplateView.as_view(template_name='likuciu_zemelapis.html'), name='likuciu_zemelapis'),
     path('uzklausos/', TemplateView.as_view(template_name='uzklausu_sarasas.html')),
     path('uzklausa_perziura/', TemplateView.as_view(template_name='uzklausa_perziura.html')),
     path('nauja_uzklausa/', TemplateView.as_view(template_name='nauja_uzklausa.html')),
