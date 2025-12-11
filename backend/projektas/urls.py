@@ -28,6 +28,7 @@ urlpatterns = [
     path('prekes/', include('prekes.urls')),
     path('prekiu_sarasas/', include('prekes.urls')),
      path('likuciu_zemelapis/<int:preke_id>/', likuciu_zemelapis, name='likuciu_zemelapis'),
+    path('grafikai/', include('grafikai.urls')), 
 
 
 
@@ -38,11 +39,11 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
     path('paskyros/', TemplateView.as_view(template_name='paskyros.html')),
     path('grafiku_generavimas/', TemplateView.as_view(template_name='grafiku_generavimas.html')),
-    path('grafikai/', TemplateView.as_view(template_name='grafikai.html')),
+    #path('grafikai/', TemplateView.as_view(template_name='grafikai.html')),
     path('pagrindinis/', TemplateView.as_view(template_name='pagrindinis.html')),
     #path('uzsakymai/', TemplateView.as_view(template_name="uzsakymai.html")),
     #path('naujas_uzsakymas/', TemplateView.as_view(template_name="naujas_uzsakymas.html")),
-    path('algalapis/', TemplateView.as_view(template_name='algalapis.html')),
+    #path('algalapis/', TemplateView.as_view(template_name='algalapis.html')),
     #path('redaguoti_uzsakyma/', TemplateView.as_view(template_name='redaguoti_uzsakyma.html')),
     #path('apmoketi_uzsakyma/', TemplateView.as_view(template_name='apmoketi_uzsakyma.html')),
 
@@ -51,10 +52,10 @@ urlpatterns = [
     #path('preke/', TemplateView.as_view(template_name='preke_perziura.html')),
     #path('preke_nauja/', TemplateView.as_view(template_name='preke_nauja.html')),
    # path('likuciu_zemelapis/', TemplateView.as_view(template_name='likuciu_zemelapis.html'), name='likuciu_zemelapis'),
-    path('uzklausos/', TemplateView.as_view(template_name='uzklausu_sarasas.html')),
-    path('uzklausa_perziura/', TemplateView.as_view(template_name='uzklausa_perziura.html')),
-    path('nauja_uzklausa/', TemplateView.as_view(template_name='nauja_uzklausa.html')),
-    path('grafiko_keitimo_uzklausa/', TemplateView.as_view(template_name='grafiko_keitimo_uzklausa.html')),
+    #path('uzklausos/', TemplateView.as_view(template_name='uzklausu_sarasas.html')),
+   # path('uzklausa_perziura/', TemplateView.as_view(template_name='uzklausa_perziura.html')),
+    #path('nauja_uzklausa/', TemplateView.as_view(template_name='nauja_uzklausa.html')),
+    #path('grafiko_keitimo_uzklausa/', TemplateView.as_view(template_name='grafiko_keitimo_uzklausa.html')),
    # path('iranga/', TemplateView.as_view(template_name='irangos_perziura.html')),
    # path('iranga_prideti/', TemplateView.as_view(template_name='iranga_prideti.html')),
    # path('iranga_redaguoti/', TemplateView.as_view(template_name='iranga_redaguoti.html')),

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
      'iranga',
      'uzsakymai',
       'prekes',
+      'grafikai',
 ]
 
 MIDDLEWARE = [
@@ -109,6 +110,7 @@ DATABASES = {
 }
 
 # Stripe configuration
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

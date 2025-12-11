@@ -4,63 +4,61 @@
 <head>
   <meta charset="UTF-8">
   <title>Algalapio generavimas</title>
-  <link rel="stylesheet" href="{% static 'css/algalapis.css' %}">
-  <script src="{% static 'js/algalapis.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/uzsakymai.css' %}">
 </head>
 <body>
-  <header>
-    <div class="logo">Žemės Ūkio IS</div>
-    <nav>
-      <a href="/pagrindinis/">Pagrindinis</a>
-      <a href="/grafikai/">Darbo grafikai</a>
-      <a href="/algalapis/">Algalapis</a>
-    </nav>
-  </header>
 
-  <h1>Algalapio generavimas</h1>
+<header>
+  <div class="logo">Žemės Ūkio IS</div>
+  <nav>
+    <a href="/pagrindinis/">Pagrindinis</a>
+    <a href="/grafikai/">Darbo grafikas</a>
+    <a href="/grafikai/uzklausos/">Užklausos</a>
+    <a href="/grafikai/algalapis/">Algalapis</a>
+  </nav>
+</header>
 
-  <div class="form-container">
-    <label>Mėnuo:</label>
-    <select>
-      <option>Sausis</option>
-      <option>Vasaris</option>
-      <option>Kovas</option>
-      <option>Balandis</option>
-      <option>Gegužė</option>
-      <option>Birželis</option>
-      <option>Liepa</option>
-      <option>Rugpjūtis</option>
-      <option>Rugsėjis</option>
-      <option>Spalis</option>
-      <option>Lapkritis</option>
-      <option>Gruodis</option>
-    </select>
+<h1>Algalapio generavimas</h1>
 
-    <button class="generate">Sugeneruoti algalapį</button>
+{% if msg %}
+  <div class="alert alert-error">
+    {{ msg }}
   </div>
+{% endif %}
 
-  <table class="pay-table">
-    <tr>
-      <th>Diena</th>
-      <th>Dirbtos valandos</th>
-      <th>Tarifas</th>
-      <th>Užmokestis</th>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-  </table>
+<div style="max-width: 600px; margin: 0 auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+  <form method="post">
+    {% csrf_token %}
 
-  <div class="actions">
-    <button class="download">Atsisiųsti</button>
-    <button class="print">Spausdinti</button>
-  </div>
+    <div style="display:flex; gap:15px; margin-bottom:16px;">
+      <div style="flex:1;">
+        <label for="nuo"><strong>Laikotarpis nuo *</strong></label>
+        <input type="date" id="nuo" name="nuo" required
+               style="width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #cbd5e1;">
+      </div>
+      <div style="flex:1;">
+        <label for="iki"><strong>Iki *</strong></label>
+        <input type="date" id="iki" name="iki" required
+               style="width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #cbd5e1;">
+      </div>
+    </div>
 
-  <footer>
-    © 2025 Žemės Ūkio IS
-  </footer>
+    <p style="font-size:14px; color:#4b5563; margin-bottom:16px;">
+      Sistema surinks tavo darbo grafiko įrašus iš pasirinkto laikotarpio,
+      suskaičiuos dirbtas valandas ir sugeneruos paprastą algalapio PDF.
+    </p>
+
+    <div style="margin-top:20px; display:flex; gap:10px;">
+      <button type="submit" class="btn-pay">Generuoti PDF</button>
+      <a href="/pagrindinis/" class="btn-cancel" style="text-decoration:none; display:inline-block; padding:8px 16px;">
+        Grįžti
+      </a>
+    </div>
+  </form>
+</div>
+
+<footer>
+  © 2025 Žemės Ūkio IS
+</footer>
 </body>
 </html>

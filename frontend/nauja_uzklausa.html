@@ -4,43 +4,79 @@
 <head>
   <meta charset="UTF-8">
   <title>Nauja užklausa</title>
-  <link rel="stylesheet" href="{% static 'css/nauja_uzklausa.css' %}">
-  <script src="{% static 'js/nauja_uzklausa.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/uzsakymai.css' %}">
 </head>
 <body>
-  <header>
-    <div class="logo">Žemės Ūkio IS</div>
-    <nav>
-      <a href="/pagrindinis/">Pagrindinis</a>
-      <a href="/iranga/">Įranga</a>
-      <a href="/prekiu_sarasas/">Prekių sąrašas</a>
-      <a href="/uzklausos/">Užklausos</a>
-      <a href="/uzsakymai/">Užsakymai</a>
-      <a href="/grafikai/">Darbo grafikai</a>
-      <a href="/registracija/">Registracija</a>
-      <a href="/prisijungimas/">Prisijungimas</a>
-    </nav>
-  </header>
 
-  <main>
-    <h1>Nauja užklausa</h1>
+<header>
+  <div class="logo">Žemės Ūkio IS</div>
+  <nav>
+    <a href="/pagrindinis/">Pagrindinis</a>
+    <a href="/grafikai/uzklausos/">Užklausos</a>
+  </nav>
+</header>
 
-    <div class="form-container">
-      <label for="tipas">Užklausos tipas *</label>
-      <input type="text" id="tipas" placeholder="Įveskite užklausos tipą">
+<h1>Nauja užklausa</h1>
 
-      <label for="aprasymas">Aprašymas *</label>
-      <textarea id="aprasymas" placeholder="Trumpai aprašykite užklausą..."></textarea>
+{% if msg %}
+  <div class="alert {% if msg_type == 'error' %}alert-error{% endif %}">
+    {{ msg }}
+  </div>
+{% endif %}
 
-      <div class="actions">
-        <button class="submit" onclick="pateiktiUzklausa()">Pateikti</button>
-        <button class="back" onclick="window.location.href='/grafikai/'">Grįžti</button>
+<div style="max-width: 800px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+
+  <form method="post">
+    {% csrf_token %}
+
+    <!-- atitinka request.POST.get("uzklausos_tipas") -->
+    <label for="tipas"><strong>Užklausos tipas *</strong></label>
+    <select id="tipas" name="uzklausos_tipas" required
+            style="width:100%; padding:8px; margin:6px 0 16px 0;">
+      <option value="">-- Pasirinkite tipą --</option>
+      <option value="Atostogų užklausa">Atostogų užklausa</option>
+      <option value="Biuletenio užklausa">Biuletenio užklausa</option>
+      <option value="Viršvalandžių užklausa">Viršvalandžių užklausa</option>
+      <option value="Kita užklausa">Kita užklausa</option>
+    </select>
+
+    <!-- atitinka request.POST.get("priezastis") -->
+    <label for="priezastis"><strong>Priežastis *</strong></label>
+    <textarea id="priezastis" name="priezastis" rows="4" required
+              style="width:100%; padding:8px; margin:6px 0 16px 0; border-radius:8px; border:1px solid #cbd5e1;"></textarea>
+
+    <!-- datos + (nebūtini) laikai: nuo_data, nuo_laikas, iki_data, iki_laikas -->
+    <div style="display:flex; gap:15px; margin-bottom:16px;">
+      <div style="flex:1;">
+        <label for="nuo_data"><strong>Nuo *</strong></label>
+        <input type="date" id="nuo_data" name="nuo_data" required
+               style="width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #cbd5e1;">
+        <input type="time" id="nuo_laikas" name="nuo_laikas"
+               style="width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #cbd5e1;">
+      </div>
+
+      <div style="flex:1;">
+        <label for="iki_data"><strong>Iki *</strong></label>
+        <input type="date" id="iki_data" name="iki_data" required
+               style="width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #cbd5e1;">
+        <input type="time" id="iki_laikas" name="iki_laikas"
+               style="width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #cbd5e1;">
       </div>
     </div>
-  </main>
 
-  <footer>
-    © 2025 Žemės Ūkio IS
-  </footer>
+    <div style="margin-top:20px; display:flex; gap:10px;">
+      <button type="submit" class="btn-edit">Pateikti užklausą</button>
+      <a href="/grafikai/uzklausos/" class="btn-cancel"
+         style="text-decoration:none; display:inline-block; padding:8px 16px;">
+        Atgal į sąrašą
+      </a>
+    </div>
+  </form>
+
+</div>
+
+<footer>
+  © 2025 Žemės Ūkio IS
+</footer>
 </body>
 </html>
